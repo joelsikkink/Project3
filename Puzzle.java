@@ -1,8 +1,9 @@
 import java.awt.Color;
 
 public class Puzzle {
-
-	int[][] number = new int[9][9];
+	
+	int cellRow;
+	int cellColumn;
 	
 	Cells puzzle = new Cells();
 	EZRectangle button;
@@ -19,17 +20,48 @@ public class Puzzle {
 			for(int row = 0; row < 9; row++) {
 				for(int column = 0; column < 9; column++) {
 					if(puzzle.cells[row][column].isPointInElement(x,y)) {
-						number[row][column]++;
-						if(number[row][column] > 9) {
-							number[row][column] = 0;
-						}
-						puzzle.setSlot(row, column, number[row][column]);
+						cellRow = row;
+						cellColumn = column;
 					}
 				}
 			}
 		}
+		userInput(cellRow,cellColumn);
 	}
 
+	private void userInput(int cellRow, int cellColumn) {
+		if(EZInteraction.wasKeyPressed('1')) {
+			puzzle.setSlot(cellRow, cellColumn, 1);
+		}
+		if(EZInteraction.wasKeyPressed('2')) {
+			puzzle.setSlot(cellRow, cellColumn, 2);
+		}
+		if(EZInteraction.wasKeyPressed('3')) {
+			puzzle.setSlot(cellRow, cellColumn, 3);
+		}
+		if(EZInteraction.wasKeyPressed('4')) {
+			puzzle.setSlot(cellRow, cellColumn, 4);
+		}
+		if(EZInteraction.wasKeyPressed('5')) {
+			puzzle.setSlot(cellRow, cellColumn, 5);
+		}
+		if(EZInteraction.wasKeyPressed('6')) {
+			puzzle.setSlot(cellRow, cellColumn, 6);
+		}
+		if(EZInteraction.wasKeyPressed('7')) {
+			puzzle.setSlot(cellRow, cellColumn, 7);
+		}
+		if(EZInteraction.wasKeyPressed('8')) {
+			puzzle.setSlot(cellRow, cellColumn, 8);
+		}
+		if(EZInteraction.wasKeyPressed('9')) {
+			puzzle.setSlot(cellRow, cellColumn, 9);
+		}
+		if(EZInteraction.wasKeyPressed('0')) {
+			puzzle.setSlot(cellRow, cellColumn, 0);
+		}
+	}
+	
 	public void setDark(boolean trigger) {
 		if(trigger) {
 			for(int row = 0; row < 9; row++) {
