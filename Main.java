@@ -9,8 +9,11 @@ public class Main {
 		Puzzle sudoku = new Puzzle();
 		sudoku.setDark(true);
 		EZ.setBackgroundColor(Color.darkGray);
-		while(sudoku.buttonFunction()) {
+		while(sudoku.buttonFunctionA()) {
 			sudoku.interaction();
+			EZ.refreshScreen();
+		}
+		while(sudoku.buttonFunctionB()) {
 			EZ.refreshScreen();
 		}
 	}
