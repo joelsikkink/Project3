@@ -4,12 +4,17 @@ public class Puzzle {
 
 	int cellRow;
 	int cellColumn;
+	int cellPositionX;
+	int cellPositionY;
 
-	Cells puzzle = new Cells();
+	Cells puzzle;
 	EZRectangle[] button = new EZRectangle[3];
 	EZText[] buttonText = new EZText[3];
 
-	Puzzle() {
+	Puzzle(int x, int y) {
+		cellPositionX = x;
+		cellPositionY = y;
+		puzzle = new Cells(cellPositionX, cellPositionY);
 		buttonUI();
 	}
 
