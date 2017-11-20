@@ -6,6 +6,8 @@ public class Puzzle {
 	int cellColumn;
 	int cellPositionX;
 	int cellPositionY;
+	int pastCellR;
+	int pastCellC;
 
 	static Cells puzzle;
 	static Answer solution;
@@ -33,6 +35,7 @@ public class Puzzle {
 			}
 		}
 		userInput(cellRow, cellColumn, true);
+		highlight(cellRow, cellColumn);
 	}
 	
 	public void playing() {
@@ -51,6 +54,7 @@ public class Puzzle {
 			}
 		}
 		userInput(cellRow, cellColumn, false);
+		highlight(cellRow, cellColumn);
 	}
 
 	private void userInput(int cellRow, int cellColumn, boolean setUp) {
@@ -161,5 +165,11 @@ public class Puzzle {
 			}
 		}
 		return true;
+	}
+	public void highlight(int row, int column) {
+		puzzle.cells[pastCellR][pastCellC].setColor(Color.lightGray);
+		puzzle.cells[row][column].setColor(Color.white);
+		pastCellR = row;
+		pastCellC = column;
 	}
 }
