@@ -1,10 +1,14 @@
 import java.awt.Color;
 
 public class Title {
+	// Main Coder: Joel Sikkink
+
 	public static int titleScreen() {
+
 		EZ.initialize(500, 600);
 		EZ.setBackgroundColor(Color.WHITE);
 		EZ.addText(250, 100, "Sudoku", Color.DARK_GRAY, 130);
+
 		// buttons for regular and samurai
 		EZRectangle regular = EZ.addRectangle(250, 300, 350, 150, Color.green, true);
 		EZRectangle samurai = EZ.addRectangle(250, 500, 350, 150, Color.pink, true);
@@ -12,6 +16,7 @@ public class Title {
 		EZ.addText(250, 500, "Samurai", Color.black, 80);
 		EZ.addLine(50, 170, 450, 170, Color.black, 15);
 		boolean titleRun = true;
+
 		while (titleRun == true) {
 			int curX = EZInteraction.getXMouse();
 			int curY = EZInteraction.getYMouse();

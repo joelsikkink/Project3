@@ -1,6 +1,7 @@
 import java.awt.Color;
 
 public class Cells {
+	// Main Coder: Jhun Heinrich Domingo
 
 	// variables used in the Cells class
 	public EZRectangle[][] cells = new EZRectangle[9][9];

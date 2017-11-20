@@ -1,6 +1,7 @@
 import java.awt.Color;
 
 public class Puzzle {
+	// Main Coder: Jhun Heinrich Domingo
 
 	// variables used in the Puzzle class
 	int cellRow;
