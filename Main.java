@@ -13,6 +13,7 @@ public class Main {
 			EZ.refreshScreen();
 		}
 		while (sudoku.buttonFunctionB()) {
+			sudoku.playing();
 			EZ.refreshScreen();
 		}
 	}

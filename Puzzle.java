@@ -7,7 +7,8 @@ public class Puzzle {
 	int cellPositionX;
 	int cellPositionY;
 
-	Cells puzzle;
+	static Cells puzzle;
+	static Answer solution;
 	EZRectangle[] button = new EZRectangle[3];
 	EZText[] buttonText = new EZText[3];
 
@@ -31,39 +32,57 @@ public class Puzzle {
 				}
 			}
 		}
-		userInput(cellRow, cellColumn);
+		userInput(cellRow, cellColumn, true);
+	}
+	
+	public void playing() {
+		int x = EZInteraction.getXMouse();
+		int y = EZInteraction.getYMouse();
+		if (EZInteraction.wasMouseLeftButtonReleased()) {
+			for (int row = 0; row < 9; row++) {
+				for (int column = 0; column < 9; column++) {
+					if (puzzle.cells[row][column].isPointInElement(x, y)) {
+						if (puzzle.slotGiven[row][column] == false) {
+							cellRow = row;
+							cellColumn = column;
+						}
+					}
+				}
+			}
+		}
+		userInput(cellRow, cellColumn, false);
 	}
 
-	private void userInput(int cellRow, int cellColumn) {
+	private void userInput(int cellRow, int cellColumn, boolean setUp) {
 		if (EZInteraction.wasKeyPressed('1')) {
-			puzzle.setSlot(cellRow, cellColumn, 1);
+			puzzle.setSlot(cellRow, cellColumn, 1, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('2')) {
-			puzzle.setSlot(cellRow, cellColumn, 2);
+			puzzle.setSlot(cellRow, cellColumn, 2, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('3')) {
-			puzzle.setSlot(cellRow, cellColumn, 3);
+			puzzle.setSlot(cellRow, cellColumn, 3, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('4')) {
-			puzzle.setSlot(cellRow, cellColumn, 4);
+			puzzle.setSlot(cellRow, cellColumn, 4, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('5')) {
-			puzzle.setSlot(cellRow, cellColumn, 5);
+			puzzle.setSlot(cellRow, cellColumn, 5, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('6')) {
-			puzzle.setSlot(cellRow, cellColumn, 6);
+			puzzle.setSlot(cellRow, cellColumn, 6, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('7')) {
-			puzzle.setSlot(cellRow, cellColumn, 7);
+			puzzle.setSlot(cellRow, cellColumn, 7, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('8')) {
-			puzzle.setSlot(cellRow, cellColumn, 8);
+			puzzle.setSlot(cellRow, cellColumn, 8, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('9')) {
-			puzzle.setSlot(cellRow, cellColumn, 9);
+			puzzle.setSlot(cellRow, cellColumn, 9, setUp);
 		}
 		if (EZInteraction.wasKeyPressed('0')) {
-			puzzle.setSlot(cellRow, cellColumn, 0);
+			puzzle.setSlot(cellRow, cellColumn, 0, setUp);
 		}
 	}
 
@@ -107,21 +126,40 @@ public class Puzzle {
 	public boolean buttonFunctionA() {
 		int x = EZInteraction.getXMouse();
 		int y = EZInteraction.getYMouse();
-		if (EZInteraction.wasMouseLeftButtonReleased()) {
+		if (EZInteraction.wasMouseLeftButtonPressed()) {
 			if (button[0].isPointInElement(x, y)) {
-				button[0].hide();
-				buttonText[0].hide();
-				button[1].show();
-				buttonText[1].show();
-				button[2].show();
-				buttonText[2].show();
-				return false;
+				solution = new Answer();
+				if (solution.solveAnswers() == false) {
+					button[0].hide();
+					buttonText[0].hide();
+					button[1].show();
+					buttonText[1].show();
+					button[2].show();
+					buttonText[2].show();
+					return false;
+				}
+				else if (solution.solveAnswers()) {
+					System.out.println("This board is not possible");
+					//for some reason not working might be something in the answer code
+					return true;
+				}
 			}
 		}
 		return true;
 	}
 
 	public boolean buttonFunctionB() {
+		int x = EZInteraction.getXMouse();
+		int y = EZInteraction.getYMouse();
+		if (EZInteraction.wasMouseLeftButtonPressed()) {
+			if (button[1].isPointInElement(x, y)) {
+				puzzle.cellValue = solution.returnAnswer(true);
+			}
+			else if (button[2].isPointInElement(x, y)) {
+				puzzle.cellValue = solution.returnAnswer(false);
+				return false;
+			}
+		}
 		return true;
 	}
 }

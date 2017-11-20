@@ -4,8 +4,8 @@ public class Cells {
 
 	public EZRectangle[][] cells = new EZRectangle[9][9];
 	public EZText[][] cellValue = new EZText[9][9];
-	private int[][] slot = new int[9][9];
-	private boolean[][] slotGiven = new boolean[9][9];
+	int[][] slot = new int[9][9];
+	boolean[][] slotGiven = new boolean[9][9];
 	private int positionX;
 	private int positionY;
 
@@ -27,14 +27,17 @@ public class Cells {
 		}
 	}
 
-	public void setSlot(int r, int c, int num) {
+	public void setSlot(int r, int c, int num, boolean setUp) {
 		slot[r][c] = num;
-		slotGiven[r][c] = true;
-		if (slot[r][c] == 0) {
-			slotGiven[r][c] = false;
+		if (setUp) {
+			slotGiven[r][c] = true;
+			if (slot[r][c] == 0) {
+				slotGiven[r][c] = false;
+			}
 		}
 		update(r, c, num);
 	}
+
 
 	private void update(int r, int c, int num) {
 		String number = "";
