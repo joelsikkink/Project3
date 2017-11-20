@@ -17,15 +17,13 @@ public class Main {
 			while (sudoku.buttonFunctionB()) {
 				sudoku.playing();
 				EZ.refreshScreen();
-				
 			}
-		}
+		} 
 		else if (choice == 2) {
 			EZ.initialize(500, 600);
-			
-
-		} else {
-
+			EZ.addText(250, 300, "PLACEHOLDER FOR SAMURAI", Color.black, 25);
+		} 
+		else {
 		}
 	}
 }
