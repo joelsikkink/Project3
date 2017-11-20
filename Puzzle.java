@@ -2,6 +2,7 @@ import java.awt.Color;
 
 public class Puzzle {
 
+	// variables used in the Puzzle class
 	int cellRow;
 	int cellColumn;
 	int cellPositionX;
@@ -14,6 +15,7 @@ public class Puzzle {
 	EZRectangle[] button = new EZRectangle[3];
 	EZText[] buttonText = new EZText[3];
 
+	// Puzzle constructor
 	Puzzle(int x, int y) {
 		cellPositionX = x;
 		cellPositionY = y;
@@ -21,6 +23,7 @@ public class Puzzle {
 		buttonUI();
 	}
 
+	// Interactive elements of the puzzle
 	public void interaction() {
 		int x = EZInteraction.getXMouse();
 		int y = EZInteraction.getYMouse();
@@ -37,7 +40,8 @@ public class Puzzle {
 		userInput(cellRow, cellColumn, true);
 		highlight(cellRow, cellColumn);
 	}
-	
+
+	// Changes the values of the cells through user input
 	public void playing() {
 		int x = EZInteraction.getXMouse();
 		int y = EZInteraction.getYMouse();
@@ -57,6 +61,7 @@ public class Puzzle {
 		highlight(cellRow, cellColumn);
 	}
 
+	// Uses the setSlot function of the Cells class to change the cells value
 	private void userInput(int cellRow, int cellColumn, boolean setUp) {
 		if (EZInteraction.wasKeyPressed('1')) {
 			puzzle.setSlot(cellRow, cellColumn, 1, setUp);
@@ -90,6 +95,7 @@ public class Puzzle {
 		}
 	}
 
+	// Dark mode (graphics not finalized)
 	public void setDark(boolean trigger) {
 		if (trigger) {
 			for (int row = 0; row < 9; row++) {
@@ -114,6 +120,7 @@ public class Puzzle {
 		}
 	}
 
+	// Easer user experience
 	public void buttonUI() {
 		button[0] = EZ.addRectangle(250, 550, 150, 50, Color.WHITE, true);
 		buttonText[0] = EZ.addText(250, 550, "Puzzle Initialized", Color.BLACK, 20);
@@ -127,6 +134,7 @@ public class Puzzle {
 		buttonText[2].hide();
 	}
 
+	// Function for the buttons
 	public boolean buttonFunctionA() {
 		int x = EZInteraction.getXMouse();
 		int y = EZInteraction.getYMouse();
@@ -141,10 +149,9 @@ public class Puzzle {
 					button[2].show();
 					buttonText[2].show();
 					return false;
-				}
-				else if (solution.solveAnswers()) {
+				} else if (solution.solveAnswers()) {
 					System.out.println("This board is not possible");
-					//for some reason not working might be something in the answer code
+					// for some reason not working might be something in the answer code
 					return true;
 				}
 			}
@@ -152,20 +159,22 @@ public class Puzzle {
 		return true;
 	}
 
+	// More functions of the buttons
 	public boolean buttonFunctionB() {
 		int x = EZInteraction.getXMouse();
 		int y = EZInteraction.getYMouse();
 		if (EZInteraction.wasMouseLeftButtonPressed()) {
 			if (button[1].isPointInElement(x, y)) {
 				puzzle.cellValue = solution.returnAnswer(true);
-			}
-			else if (button[2].isPointInElement(x, y)) {
+			} else if (button[2].isPointInElement(x, y)) {
 				puzzle.cellValue = solution.returnAnswer(false);
 				return false;
 			}
 		}
 		return true;
 	}
+
+	// Cleaner visual experience
 	public void highlight(int row, int column) {
 		puzzle.cells[pastCellR][pastCellC].setColor(Color.lightGray);
 		puzzle.cells[row][column].setColor(Color.white);
