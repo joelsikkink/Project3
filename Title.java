@@ -4,7 +4,8 @@ public class Title {
 	// Main Coder: Joel Sikkink
 
 	public static int titleScreen() {
-
+		
+		//initializes title window
 		EZ.initialize(500, 600);
 		EZ.setBackgroundColor(Color.WHITE);
 		EZ.addText(250, 100, "Sudoku", Color.DARK_GRAY, 130);
@@ -17,6 +18,7 @@ public class Title {
 		EZ.addLine(50, 170, 450, 170, Color.black, 15);
 		boolean titleRun = true;
 
+		//allows user to click buttons to open different modes
 		while (titleRun == true) {
 			int curX = EZInteraction.getXMouse();
 			int curY = EZInteraction.getYMouse();
