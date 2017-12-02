@@ -11,7 +11,7 @@ public class Main {
 		// Initializes based on user choice
 		if (choice == 1) {
 			EZ.initialize(500, 600);
-			Puzzle sudoku = new Puzzle(50, 50);
+			Puzzle sudoku = new Normal(50, 50);
 			sudoku.setDark(true); // Graphics under works, Dark Mode enabled for visibility of the cells
 			EZ.setBackgroundColor(Color.darkGray);
 			while (sudoku.buttonFunctionA()) {
@@ -23,8 +23,18 @@ public class Main {
 				EZ.refreshScreen();
 			}
 		} else if (choice == 2) { // Code under construction
-			EZ.initialize(500, 600);
-			EZ.addText(250, 300, "PLACEHOLDER FOR SAMURAI", Color.black, 25);
+			EZ.initialize(900, 950);
+			Puzzle samurai = new Samurai(50, 50);
+			samurai.setDark(true);
+			EZ.setBackgroundColor(Color.darkGray);
+			while (samurai.buttonFunctionA()) {
+				samurai.interaction();
+				EZ.refreshScreen();
+			}
+			while (samurai.buttonFunctionB()) {
+				samurai.playing();
+				EZ.refreshScreen();
+			}
 		} else {
 		}
 	}
