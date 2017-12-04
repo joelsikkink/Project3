@@ -3,29 +3,28 @@ import java.awt.Color;
 public class Answer {
 	// Main Coder: Kelsey Kobayashi
 
+	// Initializes the variables
 	public static int[][][] values;
 	public static boolean[][][] given;
 	protected static int boards;
 	private static final int ROWS = 9;
 	private static final int COLS = 9;
-	
+
 	public void middleBoard(int r, int c) {
-		//this block of if/else-ifs are used to copy the correct answers to the middle board
-		//although they overlap in the user's perspective, the program has two different slots for those 2 boards
-		//needs to be marked as an initial value since the board already solved those corners on other boards
-		if(r < 3 && c < 3) { //b5 (top left corner) link with b1 (bottom right corner)
+		// this block of if/else-ifs are used to copy the correct answers to the middle
+		// board although they overlap in the user's perspective, the program has two
+		// different slots for those 2 boards needs to be marked as an initial value
+		// since the board already solved those corners on other boards
+		if (r < 3 && c < 3) { // b5 (top left corner) link with b1 (bottom right corner)
 			values[r][c][4] = values[r + 6][c + 6][0];
 			given[r][c][4] = true;
-		}
-		else if(r < 3 && c > 5) { //b5 (top right corner) link with b2 (bottom left corner)
+		} else if (r < 3 && c > 5) { // b5 (top right corner) link with b2 (bottom left corner)
 			values[r][c][4] = values[r + 6][c - 6][1];
 			given[r][c][4] = true;
-		}
-		else if(r > 5 && c < 3) { //b5 (bottom left corner) link with b3 (top right corner)
+		} else if (r > 5 && c < 3) { // b5 (bottom left corner) link with b3 (top right corner)
 			values[r][c][4] = values[r - 6][c + 6][2];
 			given[r][c][4] = true;
-		}
-		else if(r > 5 && c > 5) { //b5 (bottom right corner) link with b4 (top left corner)
+		} else if (r > 5 && c > 5) { // b5 (bottom right corner) link with b4 (top left corner)
 			values[r][c][4] = values[r - 6][c - 6][3];
 			given[r][c][4] = true;
 		}
@@ -41,27 +40,30 @@ public class Answer {
 				for (int c = 0; c < COLS; c++) {
 					values[r][c][b] = Puzzle.puzzle.slot[r][c][b];
 					given[r][c][b] = Puzzle.puzzle.slotGiven[r][c][b];
-					
+					// Makes a copy of the given values, for the Answer class to use
 					if (boards == 5) {
+						// Calls the function to copy the corners for the middle board
 						middleBoard(r, c);
 					}
 				}
 			}
 		}
 	}
-	
+
 	public boolean checkBoard() {
+		// checks the givens for any duplicates amongst themselves and returns if the
+		// board is possible or not
 		boolean impossible = false;
 		for (int b = 0; b < boards; b++) {
 			for (int r = 0; r < ROWS; r++) {
 				for (int c = 0; c < COLS; c++) {
 					if (given[r][c][b] == true) {
 						if (values[r][c][b] != 0) {
-							// needs to temporarily hold the value and assign the actual slot to 0 since the checks
-							// also check the cell that is being checked
+							// needs to temporarily hold the value and assign the actual slot to 0 since the
+							// checks also check the cell that is being checked
 							int num = values[r][c][b];
 							values[r][c][b] = 0;
-						
+
 							impossible = checkBlock(r, c, b, num);
 							if (impossible == false) {
 								impossible = checkRow(r, c, b, num);
@@ -69,8 +71,9 @@ public class Answer {
 							if (impossible == false) {
 								impossible = checkColumn(r, c, b, num);
 							}
-							
-							//reassigns the slot the value and if failed the check, return board is impossible
+
+							// reassigns the slot the value and if failed the check, return board is
+							// impossible
 							values[r][c][b] = num;
 							if (impossible == true) {
 								return impossible;
@@ -87,6 +90,8 @@ public class Answer {
 	}
 
 	public void solveAnswers() {
+		// After making sure the board is possible, it finds the answer before giving
+		// the user the ability to play
 		for (int b = 0; b < boards; b++) {
 			for (int r = 0; r < ROWS; r++) {
 				for (int c = 0; c < COLS; c++) {
@@ -122,8 +127,8 @@ public class Answer {
 										}
 										if (r - subR < 0) {
 											// if the array for the rows is going to be out of bounds, go back to a
-											// previous board but
-											// if last board, board is not possible and return impossibleBoard
+											// previous board but if last board, board is not possible and return
+											// impossibleBoard
 											subR = subR - 9;
 											subB++;
 											if (b - subB < 0) {
@@ -230,10 +235,10 @@ public class Answer {
 		for (int rowCheck = -8; rowCheck < 9; rowCheck++) {
 			// from -8 so the last row can check the first row
 			// to 8 so the first row can check the last row
-			if (row + rowCheck >= 0 && row + rowCheck < 9) { // this checks the make sure the array is in bounds of 0 to
-																// 8
-				if (values[row + rowCheck][col][bor] == num) { // if it finds a duplicate number it immediately returns
-																// true
+			if (row + rowCheck >= 0 && row + rowCheck < 9) {
+				// this checks the make sure the array is in bounds of 0 to 8
+				if (values[row + rowCheck][col][bor] == num) {
+					// if it finds a duplicate number it immediately returns true
 					return true;
 				}
 			}
@@ -247,10 +252,10 @@ public class Answer {
 		for (int colCheck = -8; colCheck < 9; colCheck++) {
 			// from -8 so the last column can check the first column
 			// to 8 so the first column can check the last column
-			if (col + colCheck >= 0 && col + colCheck < 9) { // this checks the make sure the array is in bounds of 0 to
-																// 8
-				if (values[row][col + colCheck][bor] == num) { // if it finds a duplicate number it immediately returns
-																// true
+			if (col + colCheck >= 0 && col + colCheck < 9) {
+				// this checks the make sure the array is in bounds of 0 to 8
+				if (values[row][col + colCheck][bor] == num) {
+					// if it finds a duplicate number it immediately returns true
 					return true;
 				}
 			}
