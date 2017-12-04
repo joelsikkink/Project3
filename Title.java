@@ -60,6 +60,8 @@ public class Title {
 					showDifficulties();
 					while(titleRun2 == true) {
 					System.out.print("ez");
+					curX = EZInteraction.getXMouse();
+					curY = EZInteraction.getYMouse();
 					int returnNum = diffButtons(curX, curY);
 					if (returnNum > 0) {
 						closeTitle();
@@ -74,6 +76,8 @@ public class Title {
 					hideAll();
 					showDifficulties();
 					while(titleRun2 == true) {
+					curX = EZInteraction.getXMouse();
+					curY = EZInteraction.getYMouse();
 					int returnNum = diffButtons(curX, curY);
 					if (returnNum > 0) {
 						closeTitle();

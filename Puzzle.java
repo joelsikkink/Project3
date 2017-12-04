@@ -244,14 +244,14 @@ public class Puzzle {
 	// Creates an easy samurai level pre-made board
 	public boolean samuraiEasyBoard() throws java.io.IOException {
 		Scanner scan = new Scanner(new FileReader("samuraiEasyBoard.txt"));
-		for (int board = 0; board < 4; board++) {
-		for (int row = 0; row < 9; row++) {
-			for (int column = 0; column < 9; column++) {
-				int number = scan.nextInt();
-				System.out.print(number);
-				puzzle.setSlot(row, column, board, number, true);
+		for (int board = 0; board < 5; board++) {
+			for (int row = 0; row < 9; row++) {
+				for (int column = 0; column < 9; column++) {
+					int number = scan.nextInt();
+					System.out.print(number);
+					puzzle.setSlot(row, column, board, number, true);
+				}
 			}
-		}
 		}
 		scan.close();
 		boolean response = checkPreMadeBoard();
@@ -261,15 +261,16 @@ public class Puzzle {
 	// Creates a medium samurai level pre-made board
 	public boolean samuraiMediumBoard() throws java.io.IOException {
 		Scanner scan = new Scanner(new FileReader("samuraiMediumBoard.txt"));
-		for (int board = 0; board < 4; board++) {
-		for (int row = 0; row < 9; row++) {
-			for (int column = 0; column < 9; column++) {
-				int number = scan.nextInt();
-				System.out.print(number);
-				puzzle.setSlot(row, column, board, number, true);
+		for (int board = 0; board < 5; board++) {
+			for (int row = 0; row < 9; row++) {
+				for (int column = 0; column < 9; column++) {
+					int number = scan.nextInt();
+					System.out.print(number);
+					puzzle.setSlot(row, column, board, number, true);
+				}
 			}
 		}
-		}scan.close();
+		scan.close();
 		boolean response = checkPreMadeBoard();
 		return response;
 	}
@@ -277,7 +278,7 @@ public class Puzzle {
 	// Creates a hard samurai level pre-made board
 	public boolean samuraiHardBoard() throws java.io.IOException {
 		Scanner scan = new Scanner(new FileReader("samuraiHardBoard.txt"));
-		for (int board = 0; board < 4; board++) {
+		for (int board = 0; board < 5; board++) {
 		for (int row = 0; row < 9; row++) {
 			for (int column = 0; column < 9; column++) {
 				int number = scan.nextInt();
