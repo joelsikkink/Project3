@@ -95,7 +95,7 @@ public class Main {
 			Puzzle samurai = new Samurai(50, 50);
 			samurai.setDark(true);
 			EZ.setBackgroundColor(Color.darkGray);
-			while (samurai.buttonFunctionA()) {
+			while (samurai.samuraiHardBoard()) {
 			}
 			while (samurai.buttonFunctionB()) {
 				samurai.playing();
