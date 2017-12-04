@@ -17,16 +17,15 @@ public class Title {
 	public static EZText hardText;
 	public static EZText createYOText1;
 	public static EZText createYOText2;
-	
+
 	public static int titleScreen() {
-		
-		//initializes title window
+
+		// initializes title window
 		EZ.initialize(500, 600);
 		EZ.setBackgroundColor(Color.WHITE);
 		EZ.addText(250, 100, "Sudoku", Color.DARK_GRAY, 130);
 
-		// buttons for regular and samuraieasy.hide();
-		
+		// buttons for regular and samurai, then choosing difficulties
 		regular = EZ.addRectangle(250, 300, 350, 150, Color.green, true);
 		samurai = EZ.addRectangle(250, 500, 350, 150, Color.pink, true);
 		regText = EZ.addText(250, 300, "Regular", Color.black, 80);
@@ -41,6 +40,7 @@ public class Title {
 		hardText = EZ.addText(150, 500, "HARD", Color.black, 35);
 		createYOText1 = EZ.addText(350, 485, "CREATE YOUR", Color.black, 20);
 		createYOText2 = EZ.addText(350, 515, "OWN", Color.black, 20);
+		// Hides boxes and text that isn't meant to be seen yet.
 		easy.hide();
 		medium.hide();
 		hard.hide();
@@ -50,7 +50,8 @@ public class Title {
 		hardText.hide();
 		createYOText1.hide();
 		createYOText2.hide();
-		//allows user to click buttons to open different modes
+
+		// allows user to click buttons to open different modes
 		while (titleRun == true) {
 			int curX = EZInteraction.getXMouse();
 			int curY = EZInteraction.getYMouse();
@@ -58,15 +59,15 @@ public class Title {
 				if (EZInteraction.wasMouseLeftButtonReleased()) {
 					hideAll();
 					showDifficulties();
-					while(titleRun2 == true) {
-					System.out.print("ez");
-					curX = EZInteraction.getXMouse();
-					curY = EZInteraction.getYMouse();
-					int returnNum = diffButtons(curX, curY);
-					if (returnNum > 0) {
-						closeTitle();
-						return returnNum;
-						
+					while (titleRun2 == true) {
+						System.out.print("ez");
+						curX = EZInteraction.getXMouse();
+						curY = EZInteraction.getYMouse();
+						int returnNum = diffButtons(curX, curY);
+						if (returnNum > 0) {
+							closeTitle();
+							return returnNum;
+
 						}
 					}
 				}
@@ -75,34 +76,39 @@ public class Title {
 				if (EZInteraction.wasMouseLeftButtonReleased()) {
 					hideAll();
 					showDifficulties();
-					while(titleRun2 == true) {
-					curX = EZInteraction.getXMouse();
-					curY = EZInteraction.getYMouse();
-					int returnNum = diffButtons(curX, curY);
-					if (returnNum > 0) {
-						closeTitle();
-						return returnNum + 4;
-						}
+					while (titleRun2 == true) {
+						curX = EZInteraction.getXMouse();
+						curY = EZInteraction.getYMouse();
+						int returnNum = diffButtons(curX, curY);
+						if (returnNum > 0) {
+							closeTitle();
+							return returnNum + 4;
 						}
 					}
-				
-				}		
+				}
+
+			}
 		}
 		return 0;
-		
-		
+
 	}
+
+	// Used to clear up some space and prevent copy pasting
 	public static void hideAll() {
 		regular.hide();
 		samurai.hide();
 		regText.hide();
 		samText.hide();
 	}
+
+	// Used to clear up some space and prevent copy pasting
 	public static void closeTitle() {
 		EZ.closeWindowWithIndex(0);
 		titleRun = false;
 		titleRun2 = false;
 	}
+
+	// Used to clear up some space and prevent copy pasting
 	public static void showDifficulties() {
 		easy.show();
 		medium.show();
@@ -114,22 +120,28 @@ public class Title {
 		createYOText1.show();
 		createYOText2.show();
 	}
+
+	// Makes different buttons return different numbers
 	public static int diffButtons(int curX, int curY) {
 		if (easy.isPointInElement(curX, curY)) {
 			if (EZInteraction.wasMouseLeftButtonPressed()) {
-				return 1;}
+				return 1;
+			}
 		}
 		if (medium.isPointInElement(curX, curY)) {
 			if (EZInteraction.wasMouseLeftButtonPressed()) {
-				return 2;}
+				return 2;
+			}
 		}
 		if (hard.isPointInElement(curX, curY)) {
 			if (EZInteraction.wasMouseLeftButtonPressed()) {
-				return 3;}
+				return 3;
+			}
 		}
 		if (createYO.isPointInElement(curX, curY)) {
 			if (EZInteraction.wasMouseLeftButtonPressed()) {
-				return 4;}
+				return 4;
+			}
 		}
 		return 0;
 	}
