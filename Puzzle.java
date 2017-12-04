@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Puzzle {
 	// Main Coder: Jhun Heinrich Domingo
 
-	// variables used in the Puzzle class
+	// Variables used in the Puzzle class
 	int cellRow;
 	int cellColumn;
 	int cellBoard;
@@ -22,6 +22,7 @@ public class Puzzle {
 	EZRectangle[] button = new EZRectangle[3];
 	EZText[] buttonText = new EZText[3];
 
+	// Answer function for the puzzle to check for solution
 	Answer Solution() {
 		return new AnswerSudoku();
 	}
@@ -279,19 +280,20 @@ public class Puzzle {
 	public boolean samuraiHardBoard() throws java.io.IOException {
 		Scanner scan = new Scanner(new FileReader("samuraiHardBoard.txt"));
 		for (int board = 0; board < 5; board++) {
-		for (int row = 0; row < 9; row++) {
-			for (int column = 0; column < 9; column++) {
-				int number = scan.nextInt();
-				System.out.print(number);
-				puzzle.setSlot(row, column, board, number, true);
+			for (int row = 0; row < 9; row++) {
+				for (int column = 0; column < 9; column++) {
+					int number = scan.nextInt();
+					System.out.print(number);
+					puzzle.setSlot(row, column, board, number, true);
+				}
 			}
-		}
 		}
 		scan.close();
 		boolean response = checkPreMadeBoard();
 		return response;
 	}
 
+	// Checks if puzzles are inputed correctly
 	public boolean checkPreMadeBoard() {
 		solution = Solution();
 		boolean impossible = solution.checkBoard();
