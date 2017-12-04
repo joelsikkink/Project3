@@ -206,6 +206,7 @@ public class Puzzle {
 				puzzle.setSlot(row, column, 0, number, true);
 			}
 		}
+		scan.close();
 		boolean response = checkPreMadeBoard();
 		return response;
 	}
@@ -217,9 +218,10 @@ public class Puzzle {
 			for (int column = 0; column < 9; column++) {
 				int number = scan.nextInt();
 				System.out.print(number);
-				puzzle.setSlot(row, column, 0, number, false);
+				puzzle.setSlot(row, column, 0, number, true);
 			}
 		}
+		scan.close();
 		boolean response = checkPreMadeBoard();
 		return response;
 	}
@@ -231,9 +233,10 @@ public class Puzzle {
 			for (int column = 0; column < 9; column++) {
 				int number = scan.nextInt();
 				System.out.print(number);
-				puzzle.setSlot(row, column, 0, number, false);
+				puzzle.setSlot(row, column, 0, number, true);
 			}
 		}
+		scan.close();
 		boolean response = checkPreMadeBoard();
 		return response;
 	}
@@ -246,10 +249,11 @@ public class Puzzle {
 			for (int column = 0; column < 9; column++) {
 				int number = scan.nextInt();
 				System.out.print(number);
-				puzzle.setSlot(row, column, board, number, false);
+				puzzle.setSlot(row, column, board, number, true);
 			}
 		}
 		}
+		scan.close();
 		boolean response = checkPreMadeBoard();
 		return response;
 	}
@@ -262,7 +266,7 @@ public class Puzzle {
 			for (int column = 0; column < 9; column++) {
 				int number = scan.nextInt();
 				System.out.print(number);
-				puzzle.setSlot(row, column, board, number, false);
+				puzzle.setSlot(row, column, board, number, true);
 			}
 		}
 		}scan.close();
@@ -278,10 +282,11 @@ public class Puzzle {
 			for (int column = 0; column < 9; column++) {
 				int number = scan.nextInt();
 				System.out.print(number);
-				puzzle.setSlot(row, column, board, number, false);
+				puzzle.setSlot(row, column, board, number, true);
 			}
 		}
 		}
+		scan.close();
 		boolean response = checkPreMadeBoard();
 		return response;
 	}

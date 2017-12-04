@@ -25,7 +25,8 @@ public class Title {
 		EZ.setBackgroundColor(Color.WHITE);
 		EZ.addText(250, 100, "Sudoku", Color.DARK_GRAY, 130);
 
-		// buttons for regular and samurai
+		// buttons for regular and samuraieasy.hide();
+		
 		regular = EZ.addRectangle(250, 300, 350, 150, Color.green, true);
 		samurai = EZ.addRectangle(250, 500, 350, 150, Color.pink, true);
 		regText = EZ.addText(250, 300, "Regular", Color.black, 80);
@@ -54,7 +55,6 @@ public class Title {
 			int curX = EZInteraction.getXMouse();
 			int curY = EZInteraction.getYMouse();
 			if (regular.isPointInElement(curX, curY)) {
-				System.out.print("norm");
 				if (EZInteraction.wasMouseLeftButtonReleased()) {
 					hideAll();
 					showDifficulties();
