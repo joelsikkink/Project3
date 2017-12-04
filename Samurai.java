@@ -15,7 +15,7 @@ public class Samurai extends Puzzle {
 		return new AnswerSamurai();
 	}
 	
-	// Easer user experience
+	// Easier user experience
 	public void buttonUI() {
 		button[0] = EZ.addRectangle(450, 925, 150, 50, Color.WHITE, true);
 		buttonText[0] = EZ.addText(450, 925, "Puzzle Initialized", Color.BLACK, 20);

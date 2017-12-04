@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.io.IOException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 public class Puzzle {
 	// Main Coder: Jhun Heinrich Domingo
@@ -18,7 +21,7 @@ public class Puzzle {
 	static Answer solution;
 	EZRectangle[] button = new EZRectangle[3];
 	EZText[] buttonText = new EZText[3];
-	
+
 	Answer Solution() {
 		return new AnswerSudoku();
 	}
@@ -130,7 +133,7 @@ public class Puzzle {
 		}
 	}
 
-	// Easer user experience
+	// Easier user experience
 	public void buttonUI() {
 		button[0] = EZ.addRectangle(250, 550, 150, 50, Color.WHITE, true);
 		buttonText[0] = EZ.addText(250, 550, "Puzzle Initialized", Color.BLACK, 20);
@@ -184,12 +187,120 @@ public class Puzzle {
 		return true;
 	}
 
-	// Cleaner visual experience
+	// Cleaner visual experience(Highlights Selected Cell)
 	public void highlight(int row, int column, int board) {
 		puzzle.cells[pastCellR][pastCellC][pastCellB].setColor(Color.lightGray);
 		puzzle.cells[row][column][board].setColor(Color.white);
 		pastCellR = row;
 		pastCellC = column;
 		pastCellB = board;
+	}
+
+	// Creates an easy level pre-made board
+	public boolean easyNormalBoard() throws java.io.IOException {
+		Scanner scan = new Scanner(new FileReader("easyNormalBoard.txt"));
+		for (int row = 0; row < 9; row++) {
+			for (int column = 0; column < 9; column++) {
+				int number = scan.nextInt();
+				System.out.print(number);
+				puzzle.setSlot(row, column, 0, number, true);
+			}
+		}
+		boolean response = checkPreMadeBoard();
+		return response;
+	}
+
+	// Creates a medium level pre-made board
+	public boolean mediumNormalBoard() throws java.io.IOException {
+		Scanner scan = new Scanner(new FileReader("mediumNormalBoard.txt"));
+		for (int row = 0; row < 9; row++) {
+			for (int column = 0; column < 9; column++) {
+				int number = scan.nextInt();
+				System.out.print(number);
+				puzzle.setSlot(row, column, 0, number, false);
+			}
+		}
+		boolean response = checkPreMadeBoard();
+		return response;
+	}
+
+	// Creates a hard level pre-made board
+	public boolean hardNormalBoard() throws java.io.IOException {
+		Scanner scan = new Scanner(new FileReader("hardNormalBoard.txt"));
+		for (int row = 0; row < 9; row++) {
+			for (int column = 0; column < 9; column++) {
+				int number = scan.nextInt();
+				System.out.print(number);
+				puzzle.setSlot(row, column, 0, number, false);
+			}
+		}
+		boolean response = checkPreMadeBoard();
+		return response;
+	}
+
+	// Creates an easy samurai level pre-made board
+	public boolean samuraiEasyBoard() throws java.io.IOException {
+		Scanner scan = new Scanner(new FileReader("samuraiEasyBoard.txt"));
+		for (int board = 0; board < 4; board++) {
+		for (int row = 0; row < 9; row++) {
+			for (int column = 0; column < 9; column++) {
+				int number = scan.nextInt();
+				System.out.print(number);
+				puzzle.setSlot(row, column, board, number, false);
+			}
+		}
+		}
+		boolean response = checkPreMadeBoard();
+		return response;
+	}
+
+	// Creates a medium samurai level pre-made board
+	public boolean samuraiMediumBoard() throws java.io.IOException {
+		Scanner scan = new Scanner(new FileReader("samuraiMediumBoard.txt"));
+		for (int board = 0; board < 4; board++) {
+		for (int row = 0; row < 9; row++) {
+			for (int column = 0; column < 9; column++) {
+				int number = scan.nextInt();
+				System.out.print(number);
+				puzzle.setSlot(row, column, board, number, false);
+			}
+		}
+		}scan.close();
+		boolean response = checkPreMadeBoard();
+		return response;
+	}
+
+	// Creates a hard samurai level pre-made board
+	public boolean samuraiHardBoard() throws java.io.IOException {
+		Scanner scan = new Scanner(new FileReader("samuraiHardBoard.txt"));
+		for (int board = 0; board < 4; board++) {
+		for (int row = 0; row < 9; row++) {
+			for (int column = 0; column < 9; column++) {
+				int number = scan.nextInt();
+				System.out.print(number);
+				puzzle.setSlot(row, column, board, number, false);
+			}
+		}
+		}
+		boolean response = checkPreMadeBoard();
+		return response;
+	}
+
+	public boolean checkPreMadeBoard() {
+		solution = Solution();
+		boolean impossible = solution.checkBoard();
+		if (impossible == false) {
+			button[0].hide();
+			buttonText[0].hide();
+			button[1].show();
+			buttonText[1].show();
+			button[2].show();
+			buttonText[2].show();
+			return false;
+		} else if (impossible == true) {
+			System.out.println("This board is not possible");
+			return true;
+		}
+		return true;
 	}
 }
